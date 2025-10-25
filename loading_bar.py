@@ -16,11 +16,11 @@ try:
 	except IndexError:
 		bar_len = 20
 	try:
-		time_per_bar = float(argv[2])
+		time_per_bar = int(argv[2])
 	except IndexError:
-		time_per_bar = 0.25
+		time_per_bar = 4
 except:
-	print("Usage: loading_program | loadingbar.py bar_len time_per_bar")
+	print("Usage: loading_program | loadingbar.py [bar_len] [time_per_bar]")
 	raise SystemExit(0)
 
 
@@ -48,7 +48,7 @@ def loading_bar_interior_frame(total_len: int, curr_len: int) -> str:
 	return ('=' * (curr_len)) + ('>' if curr_len <= total_len else "") + (' ' * (total_len - curr_len))
 
 def loading_bar_frame(total_len: int, curr_len: int):
-	return '[' + color_bands(loading_bar_interior_frame(total_len, (curr_len % (bar_len + 1))), i // 4) + ']'
+	return '[' + color_bands(loading_bar_interior_frame(total_len, (curr_len % (bar_len + 1))), i // time_per_bar) + ']'
 
 if __name__ == '__main__':
 	i = 0
