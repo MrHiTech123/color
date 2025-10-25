@@ -1,5 +1,8 @@
-from random import random
-from time import sleep
+# A loading bar API.
+
+# Usage: loading_command 2>&1 | loadingbar.py [bar_len] [time_per_bar]
+# Effects: Whenever loading_command prints a line, that line will be shown, and  
+
 import sty
 from sys import argv, stdin
 
@@ -15,7 +18,7 @@ try:
 	except IndexError:
 		time_per_bar = 0.25
 except:
-	print("Usage: loadingbar bar_len time_per_bar")
+	print("Usage: loading_program | loadingbar.py bar_len time_per_bar")
 	raise SystemExit(0)
 
 
