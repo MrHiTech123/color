@@ -48,7 +48,7 @@ def loading_bar_interior_frame(total_len: int, curr_len: int) -> str:
 	return ('=' * (curr_len)) + ('>' if curr_len <= total_len else "") + (' ' * (total_len - curr_len))
 
 def loading_bar_frame(total_len: int, curr_len: int):
-	return '[' + color_bands(loading_bar_interior_frame(total_len, (curr_len % bar_len)), i // 4) + ']'
+	return '[' + color_bands(loading_bar_interior_frame(total_len, (curr_len % (bar_len + 1))), i // 4) + ']'
 
 if __name__ == '__main__':
 	i = 0
@@ -62,4 +62,5 @@ if __name__ == '__main__':
 		print(loading_bar_frame(bar_len, i))
 		i += 1
 
-print()
+print(loading_bar_frame(bar_len, bar_len))
+
