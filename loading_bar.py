@@ -1,7 +1,7 @@
 from random import random
 from time import sleep
 import sty
-from sys import argv
+from sys import argv, stdin
 
 COLORS = [(255, 0, 0), (255, 128, 0), (255, 255, 0), (64, 255, 0), (0, 255, 64), (0, 255, 255), (0, 128, 255), (0, 0, 255), (128, 0, 255), (255, 0, 255), (255, 0, 128)]
 
@@ -24,9 +24,6 @@ except:
 def get_color(i: int) -> tuple[int, int, int]:
 	return COLORS[i % len(COLORS)]
 
-def rand_sleep() -> None:
-	sleep(random() * time_per_bar)
-
 PREV_LINE = '\x1B[0F'
 def back_to_prev() -> None:
 	print(PREV_LINE, end="")
@@ -46,14 +43,18 @@ def loading_bar_interior_frame(total_len: int, curr_len: int) -> str:
 	return ('=' * (curr_len)) + ('>' if curr_len <= total_len else "") + (' ' * (total_len - curr_len))
 
 def loading_bar_frame(total_len: int, curr_len: int):
-	return '[' + color_bands(loading_bar_interior_frame(bar_len, (curr_len % bar_len)), offset) + ']'
+	return '[' + color_bands(loading_bar_interior_frame(total_len, (curr_len % bar_len)), i // 4) + ']'
 
 if __name__ == '__main__':
-    
-	for i in range((bar_len + 2) * 2):
-		offset = i // 4
-		print(loading_bar_frame(bar_len, i))
+	i = 0
+	print()
+	while True:
 		back_to_prev()
-		rand_sleep()
+		try:
+			print(input() + ' ' * (bar_len + 3))
+		except EOFError:
+			break
+		print(loading_bar_frame(bar_len, i))
+		i += 1
 
 print()
