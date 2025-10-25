@@ -1,7 +1,9 @@
 # A loading bar API.
 
 # Usage: loading_command 2>&1 | loadingbar.py [bar_len] [time_per_bar]
-# Effects: Whenever loading_command prints a line, that line will be shown, and  
+# Requires: loading_command flushes stdout whenever it prints a line
+# Effects: Whenever loading_command prints a line, that line will be shown, and a progress bar will be shown underneath it
+
 
 import sty
 from sys import argv, stdin
